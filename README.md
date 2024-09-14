@@ -31,17 +31,17 @@ Latest version is `v0.15.0`.
 
 You **do not** need to download the `F-Droid` app (via the `Download F-Droid` link) to install `Termux:Float`. You can download the `Termux:Float` APK directly from the site by clicking the `Download APK` link at the bottom of each version section.
 
-It usually takes a few days (or even a week or more) for updates to be available on `F-Droid` once an update has been released on `Github`. The `F-Droid` releases are built and published by `F-Droid` once they [detect](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/com.termux.window.yml) a new `Github` release. The Termux maintainers **do not** have any control over the building and publishing of the Termux apps on `F-Droid`. Moreover, the Termux maintainers also do not have access to the APK signing keys of `F-Droid` releases, so we cannot release an APK ourselves on `Github` that would be compatible with `F-Droid` releases.
+It usually takes a few days (or even a week or more) for updates to be available on `F-Droid` once an update has been released on `GitHub`. The `F-Droid` releases are built and published by `F-Droid` once they [detect](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/com.termux.window.yml) a new `GitHub` release. The Termux maintainers **do not** have any control over the building and publishing of the Termux apps on `F-Droid`. Moreover, the Termux maintainers also do not have access to the APK signing keys of `F-Droid` releases, so we cannot release an APK ourselves on `GitHub` that would be compatible with `F-Droid` releases.
 
 The `F-Droid` app often may not notify you of updates and you will manually have to do a pull down swipe action in the `Updates` tab of the app for it to check updates. Make sure battery optimizations are disabled for the app, check https://dontkillmyapp.com/ for details on how to do that.
 
-### Github
+### GitHub
 
-`Termux:Float` application can be obtained on `Github` either from [`Github Releases`](https://github.com/termux/termux-float/releases) for version `>= 0.15.0` or from [`Github Build`](https://github.com/termux/termux-float/actions/workflows/debug_build.yml) action workflows.
+`Termux:Float` application can be obtained on `GitHub` either from [`GitHub Releases`](https://github.com/termux/termux-float/releases) for version `>= 0.15.0` or from [`GitHub Build`](https://github.com/termux/termux-float/actions/workflows/debug_build.yml) action workflows.
 
-The APKs for `Github Releases` will be listed under `Assets` drop-down of a release. These are automatically attached when a new version is released.
+The APKs for `GitHub Releases` will be listed under `Assets` drop-down of a release. These are automatically attached when a new version is released.
 
-The APKs for `Github Build` action workflows will be listed under `Artifacts` section of a workflow run. These are created for each commit/push done to the repository and can be used by users who don't want to wait for releases and want to try out the latest features immediately or want to test their pull requests. Note that for action workflows, you need to be [**logged into a `Github` account**](https://github.com/login) for the `Artifacts` links to be enabled/clickable. If you are using the [`Github` app](https://github.com/mobile), then make sure to open workflow link in a browser like Chrome or Firefox that has your Github account logged in since the in-app browser may not be logged in.
+The APKs for `GitHub Build` action workflows will be listed under `Artifacts` section of a workflow run. These are created for each commit/push done to the repository and can be used by users who don't want to wait for releases and want to try out the latest features immediately or want to test their pull requests. Note that for action workflows, you need to be [**logged into a `GitHub` account**](https://github.com/login) for the `Artifacts` links to be enabled/clickable. If you are using the [`GitHub` app](https://github.com/mobile), then make sure to open workflow link in a browser like Chrome or Firefox that has your GitHub account logged in since the in-app browser may not be logged in.
 
 The APKs for both of these are [`debuggable`](https://developer.android.com/studio/debug) and are compatible with each other but they are not compatible with other sources.
 
@@ -50,22 +50,63 @@ The APKs for both of these are [`debuggable`](https://developer.android.com/stud
 **Termux and its plugins are no longer updated on [Google Play Store](https://play.google.com/store/apps/details?id=com.termux.window) due to [android 10 issues](https://github.com/termux/termux-packages/wiki/Termux-and-Android-10) and have been deprecated. It is highly recommended to not install Termux apps from Play Store any more.** Check https://github.com/termux/termux-app#google-play-store-deprecated for details.
 ##
 
+### Creating and Configuring Termux Float Properties
 
+In Termux:Float, a specialized file named `termux.float.properties` is used to define various settings. This file should be placed in the `~/.termux/` directory, where `~` is a shortcut for the Termux home directory `/data/data/com.termux/files/home/`, also referable by the `$HOME` shell environment variable. This setup is akin to how Termux utilizes the `termux.properties` file for configuring settings.
 
-### Terminal and App Settings
+You can create and/or edit the `termux.float.properties` file by utilizing the following commands to open the `nano` text editor within the terminal:
 
-The `Termux:Float` app supports defining various settings in `~/.termux/termux.float.properties` file like the `Termux` app does in `~/.termux/termux.properties` file for version `>= 0.15.0`. Currently, only the following properties are supported: `enforce-char-based-input`, `ctrl-space-workaround`, `bell-character`, `terminal-cursor-style`, `terminal-transcript-rows`, `back-key`, `default-working-directory`, `volume-keys`. Check [Terminal Settings](https://wiki.termux.com/wiki/Terminal_Settings) for more info. The `~/` is a shortcut for the Termux home directory `/data/data/com.termux/files/home/` and can also be referred by the `$HOME` shell environment variable.
-
-You can create/edit it by running the below commands to open the `nano` text editor in the terminal. Press `Ctrl+o` and then `Enter` to save and `Ctrl+x` to exit. You can also edit it with a [SAF file browser](https://github.com/termux/termux-tasker#Creating-And-Modifying-Scripts) after creating it.
-
-```
+```bash
 mkdir -p ~/.termux
 nano ~/.termux/termux.float.properties
 ```
+In the nano editor, press `Ctrl + o` followed by `Enter` to save changes, and `Ctrl + x` to exit. Alternatively, after creating the file, it can be edited using a SAF file browser.
+
+Below is a breakdown of the supported properties in the `termux.float.properties` file, alongside examples for each:
+
+- **enforce-char-based-input**: Set to `true` to enforce character-based input.
+  ```properties
+  enforce-char-based-input=true
+  ```
+
+- **ctrl-space-workaround**: Enables a workaround for Ctrl + Space input.
+  ```properties
+  ctrl-space-workaround=true
+  ```
+
+- **bell-character**: Define a character for the terminal bell.
+  ```properties
+  bell-character=a
+  ```
+
+- **terminal-cursor-style**: Choose a cursor style (`block`, `underline`, or `bar`).
+  ```properties
+  terminal-cursor-style=block
+  ```
+
+- **terminal-transcript-rows**: Set the number of transcript rows.
+  ```properties
+  terminal-transcript-rows=1000
+  ```
+
+- **back-key**: Define the behavior of the back key (`escape` or `ctrl`).
+  ```properties
+  back-key=escape
+  ```
+
+- **default-working-directory**: Specify a default working directory.
+  ```properties
+  default-working-directory=/sdcard
+  ```
+
+- **volume-keys**: Set the behavior of volume keys (`volume`, `control`, `meta`).
+  ```properties
+  volume-keys=control
+  ```
+
+These properties allow a tailored Termux:Float environment, enhancing the user experience by catering to individual preferences and workflow requirements. For further details on terminal settings, refer to the [Termux Terminal Settings guide](https://wiki.termux.com/wiki/Terminal_Settings).
 
 ##
-
-
 
 ### Debugging
 
